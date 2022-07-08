@@ -1,0 +1,38 @@
+.navigation{
+    width: 100%;
+    max-height: 100px;
+    display: flex;
+    margin: auto;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgb(39, 39, 39);
+    color: white;
+}
+.navigation-left{
+    display: flex;
+}
+.navigation-middle{
+   color: rgb(128, 225, 250); 
+}
+.navigation-right button{
+    margin-right: 15px;
+    padding: 5px;
+    background-color:  rgb(39, 39, 39);
+    color: rgb(128, 225, 250);
+    border-color: rgb(128, 225, 250);
+    border-radius: 10px;
+}
+.navigation-right button:hover{
+color: orange;
+border-color: orange;
+transform: scale(1.1);
+}
+
+@media only screen and (max-width: 760px)  {
+    .navigation{
+        justify-content: space-around;
+    }
+    .navigation-left{
+        display: none;
+    }
+}
