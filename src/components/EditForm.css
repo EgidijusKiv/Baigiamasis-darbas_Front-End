@@ -1,0 +1,36 @@
+.form-edit, form{
+    margin: 5px;
+   background-color: rgb(39, 39, 39);
+   color: rgb(128, 225, 250);
+   border-radius: 10px;
+}
+h3{
+    width: auto;
+    text-align: center;
+    margin: auto;
+}
+form{
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    padding-top: 5px;
+}
+.form-edit button{
+    background-color: rgb(39, 39, 39);
+    color: rgb(128, 225, 250);
+    border: 2px solid rgb(128, 225, 250);
+    border-radius: 5px;
+    width: 30%;
+    margin-top: 10px;
+}
+.form-buttons{
+    width: 80%;
+    display: flex;
+    justify-content: space-around;
+    margin: auto;
+}
+.form-edit button:hover{
+    color: orange;
+    border-color: orange;
+    transform: scale(1.1);
+    }
