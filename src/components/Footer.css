@@ -1,0 +1,21 @@
+.footer{
+    width: 100%;
+    max-height: 100px;
+    display: flex;
+    margin: auto;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(39, 39, 39);
+    color: white;
+    position: fixed;
+    bottom: 0;
+}
+.footer span{
+    color: rgb(128, 225, 250);
+}
+
+@media only screen and (max-width: 760px)  {
+    .footer{
+        position: static;
+    }
+}
