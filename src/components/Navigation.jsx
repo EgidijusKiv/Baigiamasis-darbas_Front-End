@@ -1,6 +1,8 @@
 import './Navigation.css';
 import React from 'react';
 import logo from '../logo.svg';
+import { AiOutlineUsergroupAdd } from "react-icons/ai";
+import { BiEdit } from 'react-icons/bi';
 
 
 export default function Navigation() {
@@ -15,8 +17,8 @@ export default function Navigation() {
         <h3>Final Full-Stack Project</h3>
       </div>
       <div className="navigation-right">
-        <button type="button">+ Naujas vartotojas</button>
-        <button type="button">Koreguoti vartotojus</button>
+        <button type="button"><AiOutlineUsergroupAdd/> Naujas vartotojas</button>
+        <button type="button"><BiEdit/> Koreguoti vartotojus</button>
       </div>
 
     </div>
