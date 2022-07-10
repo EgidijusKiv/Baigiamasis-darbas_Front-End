@@ -1,21 +1,24 @@
-.form-edit, form{
+.form-edit, form {
     margin: 5px;
-   background-color: rgb(39, 39, 39);
-   color: rgb(128, 225, 250);
-   border-radius: 10px;
+    background-color: rgb(39, 39, 39);
+    color: rgb(128, 225, 250);
+    border-radius: 10px;
 }
-h3{
+
+h3 {
     width: auto;
     text-align: center;
     margin: auto;
 }
-form{
+
+form {
     display: flex;
     flex-direction: column;
     padding: 20px;
     padding-top: 5px;
 }
-.form-edit button{
+
+.form-edit button {
     background-color: rgb(39, 39, 39);
     color: rgb(128, 225, 250);
     border: 2px solid rgb(128, 225, 250);
@@ -23,14 +26,57 @@ form{
     width: 30%;
     margin-top: 10px;
 }
-.form-buttons{
+
+.form-buttons {
     width: 80%;
     display: flex;
     justify-content: space-around;
     margin: auto;
 }
-.form-edit button:hover{
+
+.form-edit button:hover {
     color: orange;
     border-color: orange;
     transform: scale(1.1);
+}
+
+.success {
+    color: green;
+}
+.error{
+    color: red;
+}
+
+input {
+    padding: 5px;
+}
+
+input:focus {
+    background-color: rgb(250, 249, 179);
+}
+
+@media only screen and (min-width: 760px) {
+    .form-edit {
+
+        z-index: 1;
+        /* Sit on top */
+        width: 50%;
+        position: absolute;
+        left: 50%;
+        top: 40%;
+        transform: translate(-50%, -50%);
+
     }
+}
+
+@media only screen and (min-width: 992px) {
+    .form-edit {
+        width: 40%;
+    }
+}
+
+@media only screen and (min-width: 1200px) {
+    .form-edit {
+        width: 30%;
+    }
+}

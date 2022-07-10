@@ -8,29 +8,50 @@ export default function EditForm(props) {
     const [surname, setSurname] = useState(props.user.last_name);
     const [email, setEmail] = useState(props.user.email);
     const [age, setAge] = useState(props.user.age);
+    const [success, setSuccess] = useState(false);
+    const [response, setResponse] = useState(false);
+    const [error, setError] = useState(false);
 
-async function updateUser() {
-    const reqOptions = {
-        method: 'PUT',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({
-            _id: props.user._id,
-            first_name: name,
-            last_name: surname,
-            email: email,
-            age: age,
-        })
-    };
-    const response = await fetch('http://127.0.0.1:9000/users', reqOptions);
-     const data = await response.json();
-    // setFetchState(data.acknowledged);
-    // setTimeout(refresh, 3000);
-    console.log(data);
-    
-}
-// function refresh() {
-// window.location.reload();
-// }
+    async function updateUser() {
+        const reqOptions = {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                _id: props.user._id,
+                first_name: name,
+                last_name: surname,
+                email: email,
+                age: age,
+            })
+        };
+        const response = await fetch('http://127.0.0.1:9000/users', reqOptions);
+        const data = await response.json();
+        setResponse(data.acknowledged);
+    }
+
+    function checkForFetch() {
+        if (
+            name !== '' &&
+            name.length > 2 &&
+            surname !== '' &&
+            surname.length > 2 &&
+            email !== '' &&
+            email.indexOf('@') > -1 &&
+            email.indexOf('.') > -1 &&
+            age > 0 &&
+            age <= 99
+        ) {
+            setSuccess(true);
+            updateUser();
+            setTimeout(refresh, 2000);
+        } else {
+            setError(true);
+        }
+
+    }
+    function refresh() {
+        window.location.reload();
+    }
 
     return (
         <div className="form-edit">
@@ -63,11 +84,12 @@ async function updateUser() {
                 <div className='form-buttons'>
                     <button onClick={(e) => {
                         e.preventDefault()
-                        updateUser();
+                        checkForFetch();
                     }}>Submit</button>
                     <button>Atšaukti</button>
                 </div>
-
+                {(success && response) && <div className='success'>"SUCCESS!!! Esamas vartotojas pakoreguotas"</div>}
+                {(error && !response) && <div className='error'>"ERROR!!! Tikrinkite įvestus duomenis"</div>}
             </form>
         </div>
     );

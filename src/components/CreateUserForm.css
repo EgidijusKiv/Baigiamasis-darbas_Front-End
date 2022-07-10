@@ -37,3 +37,32 @@ form{
 .success{
     color: green;
 }
+input {
+    padding: 5px;
+}
+input:focus {
+    background-color: rgb(250, 249, 179);
+  }
+  @media only screen and (min-width: 760px)  {
+    .form-create{
+    
+        z-index: 1; /* Sit on top */
+        width: 50%;
+        position: absolute;
+        left: 50%;
+        top: 40%;
+        transform: translate(-50%, -50%);
+        
+    }
+}
+@media only screen and (min-width: 992px) {
+    .form-create {
+        width: 40%;
+    }
+}
+
+@media only screen and (min-width: 1200px) {
+    .form-create {
+        width: 30%;
+    }
+}

@@ -6,7 +6,9 @@ export default function CreateUserForm() {
     const [surname, setSurname] = useState('');
     const [email, setEmail] = useState('');
     const [age, setAge] = useState('');
-    const [fetchState, setFetchState] = useState(false)
+    const [success, setSuccess] = useState(false);
+    const [response, setResponse] = useState(false);
+    const [error, setError] = useState(false);
 
     async function createUser() {
         const reqOptions = {
@@ -21,14 +23,34 @@ export default function CreateUserForm() {
         };
         const response = await fetch('http://127.0.0.1:9000/users', reqOptions);
         const data = await response.json();
-        setFetchState(data.acknowledged);
-        setTimeout(refresh, 3000);
+        setResponse(data.acknowledged);
         
+        
+}
+function checkForFetch() {
+    if (
+        name !== '' && 
+        name.length > 2 &&
+        surname !== '' &&
+        surname.length > 2 &&
+        email !== '' &&
+        email.indexOf('@') > -1 &&
+        email.indexOf('.') > -1 &&
+        age > 0 &&
+        age <= 99
+        ) {
+            setSuccess(true);
+            createUser();
+            setTimeout(refresh, 3000);
+        } else {
+            setError(true);
+        }
+
 }
 function refresh() {
     window.location.reload();
 }
-console.log(fetchState);
+
     return (
         <div className="form-create">
             <h3>Naujo vartotojo forma</h3>
@@ -63,11 +85,12 @@ console.log(fetchState);
                 <div className='form-buttons'>
                     <button onClick={(e) => {
                         e.preventDefault()
-                        createUser();
+                        checkForFetch();
                     }}>Submit</button>
                     <button>Atšaukti</button>
                 </div>
-               {fetchState && <div className='success'>"SUCCESS!!! Naujas vartotojas sukurtas"</div>}
+               {(success && response) && <div className='success'>"SUCCESS!!! Naujas vartotojas sukurtas"</div>}
+               {(error && !response) && <div className='error'>"ERROR!!! Tikrinkite įvestus duomenis"</div>}
             </form>
         </div>
     );
