@@ -24,6 +24,7 @@
     border-color: rgb(128, 225, 250);
     border-radius: 10px;
 }
+
 .navigation-right button:hover{
 color: orange;
 border-color: orange;
@@ -37,5 +38,12 @@ transform: scale(1.1);
     }
     .navigation-left{
         display: none;
+    }
+    td {
+        overflow-wrap: break-word;
+    }
+    .navigation-right{
+        display: flex;
+        flex-direction: column;
     }
 }

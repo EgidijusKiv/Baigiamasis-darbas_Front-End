@@ -15,6 +15,7 @@ export default function Navigation() {
         <h3>Final Full-Stack Project</h3>
       </div>
       <div className="navigation-right">
+        <button type="button">+ Naujas vartotojas</button>
         <button type="button">Koreguoti vartotojus</button>
       </div>
 
