@@ -1,15 +1,20 @@
 import './Header.css';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { BiEdit } from 'react-icons/bi';
 import { RiDeleteBinLine } from 'react-icons/ri';
 import EditForm from './EditForm'
+import { EditContext } from '../App';
 import CreateUserForm from './CreateUserForm'
+
+
 
 export default function Header(props) {
   const [users, setUsers] = useState([]);
   const [editUser, setEditUser] = useState(false);
   const [userInfo, setUserInfo] = useState([]);
   const [newUser, setNewUser] = useState(false);
+  const {edit} = useContext(EditContext);
+
 
   async function getUsers() {
     const result = await fetch('http://127.0.0.1:9000/users');
@@ -53,7 +58,7 @@ export default function Header(props) {
             <th>Pavardė</th>
             <th>El.paštas</th>
             <th>Amžius</th>
-            <th />
+            {edit && <th /> }
           </tr>
           {users
             .map((user, i) => (

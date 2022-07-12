@@ -1,11 +1,13 @@
 import './Navigation.css';
-import React from 'react';
+import React, {useContext} from 'react';
 import logo from '../logo.svg';
 import { AiOutlineUsergroupAdd } from "react-icons/ai";
 import { BiEdit } from 'react-icons/bi';
+import { EditContext } from '../App';
 
 
 export default function Navigation() {
+  const {edit, setEdit} = useContext(EditContext);
   return (
     <div className="navigation">
       <div className="navigation-left">
@@ -18,7 +20,9 @@ export default function Navigation() {
       </div>
       <div className="navigation-right">
         <button type="button"><AiOutlineUsergroupAdd/> Naujas vartotojas</button>
-        <button type="button"><BiEdit/> Koreguoti vartotojus</button>
+        <button 
+        onClick={()=>{ edit ? setEdit(false) : setEdit(true)}} 
+        type="button"><BiEdit/> Koreguoti vartotojus</button>
       </div>
 
     </div>
