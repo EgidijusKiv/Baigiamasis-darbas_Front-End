@@ -1,6 +1,6 @@
 import './EditForm.css';
-import React from 'react';
-import { useState } from 'react';
+import React, { useContext, useState } from 'react';
+import { EditContext } from '../App';
 
 export default function EditForm(props) {
     console.log(props);
@@ -11,6 +11,7 @@ export default function EditForm(props) {
     const [success, setSuccess] = useState(false);
     const [response, setResponse] = useState(false);
     const [error, setError] = useState(false);
+    const { setEditUser } = useContext(EditContext);
 
     async function updateUser() {
         const reqOptions = {
@@ -86,7 +87,10 @@ export default function EditForm(props) {
                         e.preventDefault()
                         checkForFetch();
                     }}>Submit</button>
-                    <button>Atšaukti</button>
+                    <button onClick={(e) => {
+                        e.preventDefault()
+                        setEditUser(false);
+                    }} >Atšaukti</button>
                 </div>
                 {(success && response) && <div className='success'>"SUCCESS!!! Esamas vartotojas pakoreguotas"</div>}
                 {(error && !response) && <div className='error'>"ERROR!!! Tikrinkite įvestus duomenis"</div>}

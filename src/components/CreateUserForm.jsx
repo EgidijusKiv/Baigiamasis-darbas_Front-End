@@ -1,5 +1,6 @@
 import './CreateUserForm.css'
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
+import { EditContext } from '../App';
 
 export default function CreateUserForm() {
     const [name, setName] = useState('');
@@ -9,6 +10,7 @@ export default function CreateUserForm() {
     const [success, setSuccess] = useState(false);
     const [response, setResponse] = useState(false);
     const [error, setError] = useState(false);
+    const { setNewUser } = useContext(EditContext);
 
     async function createUser() {
         const reqOptions = {
@@ -87,7 +89,10 @@ function refresh() {
                         e.preventDefault()
                         checkForFetch();
                     }}>Submit</button>
-                    <button>Atšaukti</button>
+                    <button onClick={(e) => {
+                        e.preventDefault()
+                        setNewUser(false);
+                    }}>Atšaukti</button>
                 </div>
                {(success && response) && <div className='success'>"SUCCESS!!! Naujas vartotojas sukurtas"</div>}
                {(error && !response) && <div className='error'>"ERROR!!! Tikrinkite įvestus duomenis"</div>}

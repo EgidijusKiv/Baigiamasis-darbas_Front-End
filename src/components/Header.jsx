@@ -10,10 +10,8 @@ import CreateUserForm from './CreateUserForm'
 
 export default function Header(props) {
   const [users, setUsers] = useState([]);
-  const [editUser, setEditUser] = useState(false);
   const [userInfo, setUserInfo] = useState([]);
-  const [newUser, setNewUser] = useState(false);
-  const {edit} = useContext(EditContext);
+  const { edit, newUser, editUser, setEditUser} = useContext(EditContext);
 
 
   async function getUsers() {
@@ -32,18 +30,12 @@ export default function Header(props) {
   }, []);
 
   function showEditUser(user) {
-    setEditUser(!editUser)
+    setEditUser(true)
     setUserInfo(user)
-  }
-  function createNewUser() {
-    setNewUser(!newUser)  
   }
 
   return (
     <div className="header">
-      <button onClick={(e) => {
-        createNewUser();
-      }}>Test NewUser</button>
       {editUser && <div>
         <EditForm user={userInfo} />
       </div>}
@@ -58,7 +50,7 @@ export default function Header(props) {
             <th>Pavardė</th>
             <th>El.paštas</th>
             <th>Amžius</th>
-            {edit && <th /> }
+            {edit && <th/> }
           </tr>
           {users
             .map((user, i) => (

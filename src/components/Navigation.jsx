@@ -7,7 +7,7 @@ import { EditContext } from '../App';
 
 
 export default function Navigation() {
-  const {edit, setEdit} = useContext(EditContext);
+  const {edit, setEdit, newUser, setNewUser } = useContext(EditContext);
   return (
     <div className="navigation">
       <div className="navigation-left">
@@ -19,10 +19,12 @@ export default function Navigation() {
         <h3>Final Full-Stack Project</h3>
       </div>
       <div className="navigation-right">
-        <button type="button"><AiOutlineUsergroupAdd/> Naujas vartotojas</button>
+        <button 
+        onClick={()=>{ newUser ? setNewUser(false) : setNewUser(true)}}
+        type="button"><AiOutlineUsergroupAdd/> Naujas vartotojas</button>
         <button 
         onClick={()=>{ edit ? setEdit(false) : setEdit(true)}} 
-        type="button"><BiEdit/> Koreguoti vartotojus</button>
+        type="button"><BiEdit/>{!edit ? ' Koreguoti vartotojus' : ' Išjungti koregavimą'} </button>
       </div>
 
     </div>
