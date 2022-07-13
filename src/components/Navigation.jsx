@@ -1,13 +1,15 @@
 import './Navigation.css';
-import React, {useContext} from 'react';
-import logo from '../logo.svg';
-import { AiOutlineUsergroupAdd } from "react-icons/ai";
+import React, { useContext } from 'react';
+import { AiOutlineUsergroupAdd } from 'react-icons/ai';
 import { BiEdit } from 'react-icons/bi';
-import { EditContext } from '../App';
+import logo from '../logo.svg';
 
+import EditContext from './EditContext';
 
 export default function Navigation() {
-  const {edit, setEdit, newUser, setNewUser } = useContext(EditContext);
+  const {
+    edit, setEdit, newUser, setNewUser,
+  } = useContext(EditContext);
   return (
     <div className="navigation">
       <div className="navigation-left">
@@ -19,12 +21,28 @@ export default function Navigation() {
         <h3>Final Full-Stack Project</h3>
       </div>
       <div className="navigation-right">
-        <button 
-        onClick={()=>{ newUser ? setNewUser(false) : setNewUser(true)}}
-        type="button"><AiOutlineUsergroupAdd/> Naujas vartotojas</button>
-        <button 
-        onClick={()=>{ edit ? setEdit(false) : setEdit(true)}} 
-        type="button"><BiEdit/>{!edit ? ' Koreguoti vartotojus' : ' Išjungti koregavimą'} </button>
+        <button
+          onClick={() => {
+            if (newUser) { setNewUser(false); } else { setNewUser(true); }
+          }}
+          type="button"
+        >
+          <AiOutlineUsergroupAdd />
+          {' '}
+          Naujas vartotojas
+
+        </button>
+        <button
+          onClick={() => {
+            if (edit) { setEdit(false); } else { setEdit(true); }
+          }}
+          type="button"
+        >
+          <BiEdit />
+          {!edit ? ' Koreguoti vartotojus' : ' Išjungti koregavimą'}
+          {' '}
+
+        </button>
       </div>
 
     </div>

@@ -2,17 +2,16 @@ import './Header.css';
 import { useEffect, useState, useContext } from 'react';
 import { BiEdit } from 'react-icons/bi';
 import { RiDeleteBinLine } from 'react-icons/ri';
-import EditForm from './EditForm'
-import { EditContext } from '../App';
-import CreateUserForm from './CreateUserForm'
-
-
-
-export default function Header(props) {
+import EditForm from './EditForm';
+import EditContext from './EditContext';
+import CreateUserForm from './CreateUserForm';
+// eslint-disable-next-line
+export default function Header({ edit: propsEdit }) {
   const [users, setUsers] = useState([]);
   const [userInfo, setUserInfo] = useState([]);
-  const { edit, newUser, editUser, setEditUser} = useContext(EditContext);
-
+  const {
+    edit, newUser, editUser, setEditUser,
+  } = useContext(EditContext);
 
   async function getUsers() {
     const result = await fetch('http://127.0.0.1:9000/users');
@@ -20,28 +19,31 @@ export default function Header(props) {
     setUsers(data);
   }
   async function deleteUser(id) {
-    await fetch(`http://127.0.0.1:9000/users/${id}`, {method: 'DELETE'} );
+    await fetch(`http://127.0.0.1:9000/users/${id}`, { method: 'DELETE' });
     window.location.reload();
   }
-
 
   useEffect(() => {
     getUsers();
   }, []);
 
   function showEditUser(user) {
-    setEditUser(true)
-    setUserInfo(user)
+    setEditUser(true);
+    setUserInfo(user);
   }
 
   return (
     <div className="header">
-      {editUser && <div>
+      {editUser && (
+      <div>
         <EditForm user={userInfo} />
-      </div>}
-      {newUser && <div>
+      </div>
+      )}
+      {newUser && (
+      <div>
         <CreateUserForm />
-      </div>}
+      </div>
+      )}
       <table className="header-table">
         <tbody>
           <tr>
@@ -50,17 +52,18 @@ export default function Header(props) {
             <th>Pavardė</th>
             <th>El.paštas</th>
             <th>Amžius</th>
-            {edit && <th/> }
+            {edit && <th> </th> }
           </tr>
           {users
             .map((user, i) => (
-              <tr key={i}>
+              // eslint-disable-next-line
+              <tr key={user._id}>
                 <td>{`${i + 1}.`}</td>
                 <td>{user.first_name}</td>
                 <td>{user.last_name}</td>
                 <td>{user.email}</td>
                 <td>{user.age}</td>
-                {props.edit && (
+                {propsEdit && (
                   <td>
                     <button
                       onClick={(e) => {
@@ -68,7 +71,8 @@ export default function Header(props) {
                         showEditUser(user);
                       }}
                       className="header-table edit"
-                      type="button">
+                      type="button"
+                    >
                       <span><BiEdit /></span>
                       {' '}
                       Koreguoti
@@ -76,10 +80,12 @@ export default function Header(props) {
                     <button
                       onClick={(e) => {
                         e.preventDefault();
-                        deleteUser(user._id)
+                        // eslint-disable-next-line
+                        deleteUser(user._id); 
                       }}
                       className="header-table delete"
-                      type="button">
+                      type="button"
+                    >
                       <span><RiDeleteBinLine /></span>
                       {' '}
                       Ištrinti
