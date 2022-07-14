@@ -13,7 +13,7 @@ export default function CreateUserForm() {
   const { setNewUser } = useContext(EditContext);
 
   function refresh() {
-    window.location.reload();
+    setNewUser(false);
   }
   async function createUser() {
     const reqOptions = {

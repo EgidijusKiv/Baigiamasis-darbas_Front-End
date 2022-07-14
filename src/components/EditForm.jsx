@@ -17,7 +17,7 @@ export default function EditForm(props) {
   const { setEditUser } = useContext(EditContext);
 
   function refresh() {
-    window.location.reload();
+    setEditUser(false);
   }
 
   async function updateUser() {
