@@ -9,7 +9,7 @@ import CreateUserForm from './CreateUserForm';
 export default function Header({ edit: propsEdit }) {
   const [users, setUsers] = useState([]);
   const [userInfo, setUserInfo] = useState([]);
-  const [deleteRefresh, setDeleteRefresh] = useState([]);
+  const [deleteRefresh, setDeleteRefresh] = useState(false);
   const {
     edit, newUser, editUser, setEditUser,
   } = useContext(EditContext);
@@ -21,7 +21,11 @@ export default function Header({ edit: propsEdit }) {
   }
   async function deleteUser(id) {
     await fetch(`http://127.0.0.1:9000/users/${id}`, { method: 'DELETE' });
-    setDeleteRefresh(true);
+    if (deleteRefresh) {
+      setDeleteRefresh(false);
+    } else {
+      setDeleteRefresh(true);
+    }
   }
 
   useEffect(() => {

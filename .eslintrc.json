@@ -21,6 +21,5 @@
         "react/react-in-jsx-scope": "off",
         "linebreak-style": "off",
         "label-has-associated-control": "off"
- 
     }
 }

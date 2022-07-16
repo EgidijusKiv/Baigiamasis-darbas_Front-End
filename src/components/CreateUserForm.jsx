@@ -10,6 +10,7 @@ export default function CreateUserForm() {
   const [success, setSuccess] = useState(false);
   const [response, setResponse] = useState(false);
   const [error, setError] = useState(false);
+  const [resText, setResText] = useState([]);
   const { setNewUser } = useContext(EditContext);
 
   function refresh() {
@@ -28,8 +29,14 @@ export default function CreateUserForm() {
     };
     const reqResponse = await fetch('http://127.0.0.1:9000/users', reqOptions);
     const data = await reqResponse.json();
-    setResponse(data.acknowledged);
-    setTimeout(refresh, 3000);
+    if (data.acknowledged) {
+      setResponse(data.acknowledged);
+      setResText(data.insertedId);
+      setTimeout(refresh, 3000);
+    } else {
+      setResponse(data[0].acknowledged);
+      setResText(data[1]);
+    }
   }
 
   function checkForFetch() {
@@ -50,7 +57,7 @@ export default function CreateUserForm() {
       setError(true);
     }
   }
-  const emailName = 'email';
+
   return (
     <div className="form-create">
       <h3>Naujo vartotojo forma</h3>
@@ -79,11 +86,11 @@ export default function CreateUserForm() {
 
         {
         // eslint-disable-next-line
-      }<label htmlFor={emailName}>El. paštas:</label>
+      }<label htmlFor={email}>El. paštas:</label>
         <input
           onChange={(e) => setEmail(e.target.value)}
           type="email"
-          id={emailName}
+          id={email}
           placeholder="...Elektroninis paštas..."
           value={email}
         />
@@ -118,8 +125,13 @@ export default function CreateUserForm() {
 
           </button>
         </div>
-        {(success && response) && <div className="success">SUCCESS!!! Naujas vartotojas sukurtas</div>}
-        {(error && !response) && <div className="error">ERROR!!! Tikrinkite įvestus duomenis</div>}
+        {(success && response) && (
+        <div className="success">
+          {`Naujas vartotojas sukurtas, kurio ID: ${resText}`}
+        </div>
+        )}
+        {!response && <div className="error">{resText}</div>}
+        {error && <div className="error">Tikrinkite įvestus duomenis</div>}
       </form>
     </div>
   );

@@ -13,6 +13,7 @@ export default function EditForm(props) {
   const [age, setAge] = useState(props.user.age);
   const [success, setSuccess] = useState(false);
   const [response, setResponse] = useState(false);
+  const [resText, setResText] = useState([]);
   const [error, setError] = useState(false);
   const { setEditUser } = useContext(EditContext);
 
@@ -35,7 +36,9 @@ export default function EditForm(props) {
     };
     const reqResponse = await fetch('http://127.0.0.1:9000/users', reqOptions);
     const data = await reqResponse.json();
-    setResponse(data.acknowledged);
+    setResponse(data[0].acknowledged);
+    // eslint-disable-next-line
+    setResText([data[1], props.user._id]);
     setTimeout(refresh, 2000);
   }
 
@@ -120,7 +123,7 @@ export default function EditForm(props) {
 
           </button>
         </div>
-        {(success && response) && <div className="success">SUCCESS!!! Esamas vartotojas pakoreguotas</div>}
+        {(success && response) && <div className="success">{`${resText[0]} kurio ID: ${resText[1]}`}</div>}
         {(error && !response) && <div className="error">ERROR!!! Tikrinkite įvestus duomenis</div>}
       </form>
     </div>
